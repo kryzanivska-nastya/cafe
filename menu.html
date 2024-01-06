@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <title>Кав'ярня</title>
+  <link rel="stylesheet" href='menu.css'>
+
+  <link rel="icon" href="/Users/admin/Downloads/524910400_a0a4359dcb_q.jpg">
+</head>
+
+<body>
+
+  <div class="logo" id="logo">
+    <a href='Project.html'>
+      <img src="/Users/admin/Downloads/msg1728989431-253087.jpg" class="images"></a>
+  </div>
+
+  <div id="container" class="container">
+    <div class="backgroungColor" id="backgroungColor"></div>
+    <div class="imageCoffee" id="imageCoffee">
+      <div id="div1">
+        <img class="myImage" id="myImage" src="/Users/admin/Downloads/4269028564_98c50c7d95_c.jpg">
+        <div class="profileText" id="profileText">
+          <div class="nameText">Капучіно</div>
+          <div>
+            Кава натуральна<br> можливо досипати корицю чи зефірки
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+    <div class="buttons" id="buttons">
+      <p><a onclick="show('operation1')">Капучіно</a></p><br>
+      <p><a onclick="show('operation2')">Американо</a></p><br>
+      <p><a onclick="show('operation3')">Фрапучіно</a></p><br>
+      <p><a onclick="show('operation4')">Американо холодне</a></p><br>
+      <p><a onclick="show('operation5')">Експресо</a></p>
+    </div>
+
+    <div id=operation1 style="display:none">
+      <div id="div1">
+
+        <img class="myImage" id="myImage" src="/Users/admin/Downloads/4269028564_98c50c7d95_c.jpg">
+
+        <div class="profileText" id="profileText">
+          <div class="nameText">Капучіно</div>
+          <div>
+            Кава натуральна<br> можливо досипати корицю чи зефірки
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+  <div id=operation2 style="display:none">
+    <div id="div2">
+      <img class="myImage" id="myImage" src="/Users/admin/Downloads/завантаження (1).jpeg">
+    </div>
+    <div class="profileText" id="profileText">
+      <div class="nameText">Американо</div>
+      <div>
+        Кава натуральна холодна<br> можливо досипати корицю чи зефірки
+      </div>
+
+    </div>
+  </div>
+  <div id=operation3 style="display:none">
+    <div id="div3">
+      <img class="myImage" id="myImage" src="/Users/admin/Downloads/завантаження (3).jpeg">
+    </div>
+    <div class="profileText" id="profileText">
+      <div class="nameText">Фрапучіно</div>
+      <div>
+        Кава натуральна<br> жожливо досипати корицю чи зефірки чи кокос
+        гаряча|холодна
+      </div>
+    </div>
+  </div>
+  <div id=operation4 style="display:none">
+    <div id="div4">
+      <img class="myImage" id="myImage" src="/Users/admin/Downloads/завантаження (5).jpeg">
+    </div>
+    <div class="profileText" id="profileText">
+      <div class="nameText">Американо холодне</div>
+      <div>
+        Кава натуральна<br> можливо досипати корицю чи зефірки чи кокос
+      </div>
+    </div>
+  </div>
+  <div id=operation5 style="display:none">
+    <div id="div5">
+      <img class="myImage" id="myImage" src="/Users/admin/Downloads/завантаження (4).jpeg">
+    </div>
+    <div class="profileText" id="profileText">
+      <div class="nameText">Експресо</div>
+      <div>
+        Кава натуральна<br> жожливо досипати корицю чи зефірки
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+
+  <a href="">
+    <img class='imgInst' src="/Users/admin/Downloads/1384015.png">
+  </a>
+
+  <a href="">
+    <img class='imgTwit' src="/Users/admin/Downloads/twitter-icon-svg-28.jpeg">
+  </a>
+
+  <a href="">
+    <img class='imgFace' src="/Users/admin/Downloads/png-clipart-computer-icons-facebook-logo-facebook-logo-fine.png">
+  </a>
+
+
+  <div class="menu-wrap">
+    <input type="checkbox" class="toggler">
+    <div class="hamburger">
+      <div></div>
+    </div>
+    <div class="menu">
+      <div>
+        <div>
+          <div class="logo1" id="logo1">
+            <a href='Project.html'>
+              <img src="/Users/admin/Downloads/msg1728989431-253087.jpg" class="images"></a>
+          </div>
+          <ul>
+            <li><a class="effect-shine" href="menu.html">Меню</a></li>
+            <li><a class="effect-shine" href="Shedule.html">Розклад</a></li>
+            <li><a class="effect-shine" href="order.html">Замовити</a></li>
+          </ul>
+
+          <a href="">
+            <img class='imgInst' src="/Users/admin/Downloads/1384015.png">
+          </a>
+
+          <a href="">
+            <img class='imgTwit' src="/Users/admin/Downloads/twitter-icon-svg-28.jpeg">
+          </a>
+
+          <a href="">
+            <img class='imgFace'
+              src="/Users/admin/Downloads/png-clipart-computer-icons-facebook-logo-facebook-logo-fine.png">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    function show(param_div_id) {
+      document.getElementById('imageCoffee').innerHTML = document.getElementById(param_div_id).innerHTML;
+    }
+  </script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset='utf-8'>
+   <title>Кав'ярня</title>
+   <link rel='stylesheet' href='order.css'>
+
+   <link rel='icon' href='/Users/admin/Downloads/524910400_a0a4359dcb_q.jpg'>
+   <meta charset='utf-8'>
+
+</head>
+
+<body>
+   <div class="logo" id="logo">
+      <a href='Project.html'>
+         <img src="/Users/admin/Downloads/msg1728989431-253087.jpg" class="images"></a>
+   </div>
+
+
+
+   <form action="" name="myForm" onsubmit="return(validate());">
+      <div class="container">
+        
+           <div> Назва напою <br>
+            <input type="text" name="Name" class="inputField"/>
+         </div>
+         <div>
+           Емейл <br>
+           <input type="email" name="Email" class="inputField"/>
+         </div>
+         <div>
+           Промокод <br>
+           <input type="text" name="Promocode" class="inputField"/>
+         </div>
+         <div>
+           Чогось добавити? 
+           
+               <select name="Choose">
+                  <option value="-1" selected>[Виберіть]</option>
+                  <option value="1">Кориця</option>
+                  <option value="2">Кокос</option>
+                  <option value="3">Цукор</option>
+               </select>
+            </div>
+            <br>
+           <div>
+           <input type="submit" value="Підтвердити замовлення"  class="submitButton"/>
+         </div>
+      </div>
+      </div>
+   </form>
+   <script>
+      function validate() {
+         if (document.myForm.Name.value == "") {
+            alert("Будь ласка напишіть назву напою!");
+            document.myForm.Name.focus();
+            return false;
+         }
+         if (document.myForm.EMail.value == "") {
+            alert("Будь ласка напишіть свій емейл!");
+            document.myForm.EMail.focus();
+            return false;
+         }
+         return (true);
+      }
+   </script>
+
+
+
+
+
+
+   <div class='menu-wrap'>
+
+
+
+      <div class="menu-wrap">
+         <input type="checkbox" class="toggler">
+         <div class="hamburger">
+            <div></div>
+         </div>
+         <div class="menu">
+            <div>
+               <div>
+                  <div class="logo1" id="logo1">
+                     <a href='Project.html'>
+                        <img src="/Users/admin/Downloads/msg1728989431-253087.jpg"></a>
+                  </div>
+                  <ul>
+                     <li><a class="effect-shine" href="menu.html">Меню</a></li>
+                     <li><a class="effect-shine" href="Shedule.html">Розклад</a></li>
+                     <li><a class="effect-shine" href="order.html">Замовити</a></li>
+                  </ul>
+
+                  <a href="">
+                     <img class='imgInst' src="/Users/admin/Downloads/1384015.png">
+                  </a>
+
+                  <a href="">
+                     <img class='imgTwit' src="/Users/admin/Downloads/twitter-icon-svg-28.jpeg">
+                  </a>
+
+                  <a href="">
+                     <img class='imgFace'
+                        src="/Users/admin/Downloads/png-clipart-computer-icons-facebook-logo-facebook-logo-fine.png">
+                  </a>
+               </div>
+            </div>
+         </div>
+      </div>
+
+
+
+
+      <p class="about wh">
+         Про кав'ярню
+         <span>"Місяць"</span>
+         <br>була створена кілька місяців тому.
+
+      </p>
+      <a href='https://www.instagram.com/realstraykids/'>
+         <img class='imgInst' src='/Users/admin/Downloads/1384015.png'>
+      </a>
+
+      <a href='https://twitter.com/Stray_Kids'>
+         <img class='imgTwit' src='/Users/admin/Downloads/twitter-icon-svg-28.jpeg'>
+      </a>
+
+      <a href='https://www.facebook.com/JYPEStrayKids?_rdc=1&_rdr'>
+         <img class='imgFace'
+            src='/Users/admin/Downloads/png-clipart-computer-icons-facebook-logo-facebook-logo-fine.png'>
+      </a>
+
+
+      <script src=/Users/admin/Desktop/Personal.html/Project.js async></script>
+      <script src='/Users/admin/Desktop/Personal.html/preloader.js'></script>
+</body>
+
+</html>

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset='utf-8'>
+   <title></title>
+   <link rel='stylesheet' href='Shedule.css'>
+   <meta charset='utf-8'>
+
+</head>
+
+<body>
+
+   <div class="logo" id="logo">
+      <a href='Project.html'>
+        <img src="/Users/admin/Downloads/msg1728989431-253087.jpg" alt="logo" class="images"></a>
+    </div>
+
+      <div class='calendar'>
+         <h1 class='calendar__heading'>SHEDULE</h1>
+         <hr class='divider'>
+         <div class='main-wrapper'></div>
+         <div class='mobile-header z-depth-1'>
+   
+            <div class='row'>
+               <div class='col-2'>
+                  <a href='#' data-activates='sidebar' class='button-collapse' style=''>
+   
+                  </a>
+               </div>
+               <div class='col'>
+   
+               </div>
+            </div>
+   
+   
+            <div class='sidebar-wrapper z-depth-2 side-nav fixed' id='sidebar'>
+   
+               <div class='sidebar-title'>
+                  <h5 id='eventDayName'>Date</h5>
+   
+                  <div class='sidebar-events' id='sidebarEvents'>
+                     <div class='empty-message'>Немає замовлення на цю дату.</div>
+                  </div>
+   
+                  <div class='calendar-footer'>
+                     <div class='emptyForm' id='emptyForm'>
+                        <a class='addEvent' id='changeFormButton'>Хочете замовити?</a>
+                     </div>
+                     <div class='addForm' id='addForm'>
+                        <h4>Замовити</h4>
+   
+                        <div class='row'>
+                           <div class='input-field col s6'>
+                              <input id='eventTitleInput' placeholder='Назва' type='text' class='validate'>
+                              <!-- <label for='eventTitleInput'>Title</label> -->
+                           </div>
+                           <div class='input-field col s6'>
+                              <input id='eventDescInput' placeholder='Побажання' type='text' class='validate'>
+                              <!-- <label for='eventDescInput'>Description</label> -->
+                           </div>
+                        </div>
+   
+                        <div class='addEventButtons'>
+                           <a class='waves-effect waves-light btn ' id='addEventButton'>Замовити</a>
+                           <a class='waves-effect waves-light btn ' id='cancelAdd'>Відмовитися</a>
+                        </div>
+   
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+   
+   
+         <div class='calendar__col calendar__col--right'>
+   
+            <div class='content'>
+               <div class='content-wrapper grey lighten-3'>
+                  <div class='container'>
+   
+                     <div class='calendar-wrapper z-depth-2'>
+   
+                        <div class='header-background'>
+                           <div class='calendar-header'>
+   
+   
+                              <div class='header-text'>
+                                 <h5 id='todayDayName'> Сьогодні, 9th </h5>
+                                 <h3 id='month-name' class='month-name'>Квітень</h3>
+   
+                                 <a class='prev-button' id='prev'>
+                                    <i class='material-icon1'>←</i>
+                                 </a>
+                                 <a class='next-button' id='next'>
+                                    <i class='material-icon2'>→</i>
+                                 </a>
+   
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+   
+   
+                     <div class='positionDays'>
+                        <div class='calendar-content'>
+                           <div id='calendar-table' class='calendar-cells'>
+                              <div id='table-header'>
+                                 <div class='row'>
+                                    <ul class='weekday'>
+                                       <li><a>
+                                             <div class='col'>Пн</div>
+                                          </a></li>
+                                       <li><a>
+                                             <div class='col'>Вт</div>
+                                          </a></li>
+                                       <li><a>
+                                             <div class='col'>Ср</div>
+                                          </a></li>
+                                       <li><a>
+                                             <div class='col'>Чт</div>
+                                          </a></li>
+                                       <li><a>
+                                             <div class='col'>Пт</div>
+                                          </a></li>
+                                       <li><a>
+                                             <div class='col'>Сб</div>
+                                          </a></li>
+                                       <li><a>
+                                             <div class='col'>Нд</div>
+                                          </a></li>
+                                    </ul>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+   
+                        <div class='positionNumbers'>
+                           <div id='table-body' class='days'>
+   
+                           </div>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+   
+</body>
+   
+<script>
+   
+let calendar = document.getElementById('calendar-table');
+let gridTable = document.getElementById('table-body');
+let currentDate = new Date();
+let selectedDate = currentDate;
+let selectedDayBlock = null;
+let globalEventObj = {};
+
+let sidebar = document.getElementById('sidebar');
+
+function createCalendar(date, side) {
+  let currentDate = date;
+  let startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+
+  let monthTitle = document.getElementById('month-name');
+  let monthName = currentDate.toLocaleString('uk-UA', {
+    month: 'long'
+  });
+  let yearNum = currentDate.toLocaleString('uk-UA', {
+    year: 'numeric'
+  });
+  monthTitle.innerHTML = `${monthName} ${yearNum}`;
+
+  if (side === 'left') {
+    gridTable.className = 'animated fadeOutRight';
+  } else {
+    gridTable.className = 'animated fadeOutLeft';
+  }
+
+  setTimeout(() => {
+    gridTable.innerHTML = '';
+
+    let newTr = document.createElement('div');
+    newTr.className = 'row';
+    let currentTr = gridTable.appendChild(newTr);
+
+    for (let i = 1; i < (startDate.getDay() || 7); i++) {
+      let emptyDivCol = document.createElement('div');
+      emptyDivCol.className = 'col empty-day';
+      currentTr.appendChild(emptyDivCol);
+    }
+
+    let lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+    lastDay = lastDay.getDate();
+
+    for (let i = 1; i <= lastDay; i++) {
+      if (currentTr.children.length >= 7) {
+        currentTr = gridTable.appendChild(addNewRow());
+      }
+      let currentDay = document.createElement('div');
+      currentDay.className = 'col';
+      if (selectedDayBlock == null && i == currentDate.getDate() || selectedDate.toDateString() == new Date(currentDate.getFullYear(), currentDate.getMonth(), i).toDateString()) {
+        selectedDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), i);
+
+        document.getElementById('eventDayName').innerHTML = selectedDate.toLocaleString('uk-UA', {
+          month: 'long',
+          day: 'numeric',
+          year: 'numeric'
+        });
+
+        selectedDayBlock = currentDay;
+        setTimeout(() => {
+          currentDay.classList.add('blue');
+          currentDay.classList.add('lighten-3');
+        }, 700);
+      }
+      currentDay.innerHTML = i;
+
+      if (globalEventObj[new Date(currentDate.getFullYear(), currentDate.getMonth(), i).toDateString()]) {
+        let eventMark = document.createElement('div');
+        eventMark.className = 'day-mark';
+        currentDay.appendChild(eventMark);
+      }
+
+      currentTr.appendChild(currentDay);
+    }
+
+    for (let i = currentTr.getElementsByTagName('div').length; i < 7; i++) {
+      let emptyDivCol = document.createElement('div');
+      emptyDivCol.className = 'col empty-day';
+      currentTr.appendChild(emptyDivCol);
+    }
+
+    if (side == 'left') {
+      gridTable.className = 'animated fadeInLeft';
+    } else {
+      gridTable.className = 'animated fadeInRight';
+    }
+
+    function addNewRow() {
+      let node = document.createElement('div');
+      node.className = 'row';
+      return node;
+    }
+
+  }, !side ? 0 : 270);
+}
+
+createCalendar(currentDate);
+
+let todayDayName = document.getElementById('todayDayName');
+todayDayName.innerHTML = 'Сьогодні ' + currentDate.toLocaleString('uk-UA', {
+  weekday: 'long',
+  day: 'numeric',
+  month: 'short'
+});
+
+let prevButton = document.getElementById('prev');
+let nextButton = document.getElementById('next');
+
+prevButton.onclick = function changeMonthPrev() {
+  currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1);
+  createCalendar(currentDate, 'left');
+}
+
+nextButton.onclick = function changeMonthNext() {
+  currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1);
+  createCalendar(currentDate, 'right');
+}
+
+function addEvent(title, desc) {
+  if (!globalEventObj[selectedDate.toDateString()]) {
+    globalEventObj[selectedDate.toDateString()] = {};
+  }
+  globalEventObj[selectedDate.toDateString()][title] = desc;
+}
+
+function showEvents() {
+  let sidebarEvents = document.getElementById('sidebarEvents');
+  let objWithDate = globalEventObj[selectedDate.toDateString()];
+
+  sidebarEvents.innerHTML = '';
+
+  if (objWithDate) {
+    let eventsCount = 0;
+    for (key in globalEventObj[selectedDate.toDateString()]) {
+      let eventContainer = document.createElement('div');
+      eventContainer.className = 'eventCard';
+
+      let eventHeader = document.createElement('div');
+      eventHeader.className = 'eventCard-header';
+
+      let eventDescription = document.createElement('div');
+      eventDescription.className = 'eventCard-description';
+
+      eventHeader.appendChild(document.createTextNode(key));
+      eventContainer.appendChild(eventHeader);
+
+      eventDescription.appendChild(document.createTextNode(objWithDate[key]));
+      eventContainer.appendChild(eventDescription);
+
+      let markWrapper = document.createElement('div');
+      markWrapper.className = 'eventCard-mark-wrapper';
+      let mark = document.createElement('div');
+      mark.classList = 'eventCard-mark';
+      markWrapper.appendChild(mark);
+      eventContainer.appendChild(markWrapper);
+
+      sidebarEvents.appendChild(eventContainer);
+
+      eventsCount++;
+    }
+
+    let emptyFormMessage = document.getElementById('emptyFormTitle');
+    emptyFormMessage.innerHTML = `${eventsCount} подій наразі`;
+  } else {
+    let emptyMessage = document.createElement('div');
+    emptyMessage.className = 'empty-message';
+    emptyMessage.innerHTML = 'На жаль, на вибрану дату подій немає';
+    sidebarEvents.appendChild(emptyMessage);
+    let emptyFormMessage = document.getElementById('emptyFormTitle');
+    emptyFormMessage.innerHTML = 'Наразі немає подій';
+  }
+}
+
+gridTable.onclick = function (e) {
+
+  if (!e.target.classList.contains('col') || e.target.classList.contains('empty-day')) {
+    return;
+  }
+
+  if (selectedDayBlock) {
+    if (selectedDayBlock.classList.contains('blue') && selectedDayBlock.classList.contains('lighten-3')) {
+      selectedDayBlock.classList.remove('blue');
+      selectedDayBlock.classList.remove('lighten-3');
+    }
+  }
+  selectedDayBlock = e.target;
+  selectedDayBlock.classList.add('blue');
+  selectedDayBlock.classList.add('lighten-3');
+
+  selectedDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), parseInt(e.target.innerHTML));
+
+  showEvents();
+
+  document.getElementById('eventDayName').innerHTML = selectedDate.toLocaleString('uk-UA', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric'
+  });
+}
+
+let changeFormButton = document.getElementById('changeFormButton');
+let addForm = document.getElementById('addForm');
+changeFormButton.onclick = function (e) {
+  addForm.style.top = 0;
+}
+
+let cancelAdd = document.getElementById('cancelAdd');
+cancelAdd.onclick = function (e) {
+  addForm.style.top = '100%';
+  let inputs = addForm.getElementsByTagName('input');
+  for (let i = 0; i < inputs.length; i++) {
+    inputs[i].value = '';
+  }
+  let labels = addForm.getElementsByTagName('label');
+  for (let i = 0; i < labels.length; i++) {
+    labels[i].className = '';
+  }
+}
+
+let addEventButton = document.getElementById('addEventButton');
+addEventButton.onclick = function (e) {
+  let title = document.getElementById('eventTitleInput').value.trim();
+  let desc = document.getElementById('eventDescInput').value.trim();
+  const event = {
+    title: title,
+    description: desc
+  }
+
+  window.localStorage.setItem(event, JSON.stringify(event));
+  addEvent(title, desc);
+  showEvents();
+  if (!title || !desc) {
+    document.getElementById('eventTitleInput').value = '';
+    document.getElementById('eventDescInput').value = '';
+    let labels = addForm.getElementsByTagName('label');
+    for (let i = 0; i < labels.length; i++) {
+      labels[i].className = '';
+    }
+    return;
+  }
+
+  console.log(JSON.parse(window.localStorage.getItem(event)))
+
+  if (!selectedDayBlock.querySelector('.day-mark')) {
+    selectedDayBlock.appendChild(document.createElement('div')).className = 'day-mark';
+  }
+
+  let inputs = addForm.getElementsByTagName('input');
+  for (let i = 0; i < inputs.length; i++) {
+    inputs[i].value = '';
+  }
+  let labels = addForm.getElementsByTagName('label');
+  for (let i = 0; i < labels.length; i++) {
+    labels[i].className = '';
+  }
+}
+
+   </script>
+
+      
+</body>
+
+</html>
